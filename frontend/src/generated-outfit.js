@@ -1,7 +1,7 @@
 import "./styling/App.css";
-import React, {useState} from "react";
-import {useLocation} from "react-router-dom";
-import {Icons} from "./icons";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Icons } from "./icons";
 
 const GeneratedOutfit = () => {
     const location = useLocation();
@@ -16,6 +16,23 @@ const GeneratedOutfit = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + outfitSuggestions.length) % outfitSuggestions.length);
     };
 
+    const saveOutfit = () => {
+        if (outfitSuggestions.length === 0) return;
+
+        const outfitToSave = outfitSuggestions[currentIndex].map(item => ({
+            image: item.image
+        }));
+
+        const existing = JSON.parse(localStorage.getItem("savedOutfits")) || [];
+        existing.push({
+            outfit: outfitToSave,
+            timestamp: Date.now()
+        });
+
+        localStorage.setItem("savedOutfits", JSON.stringify(existing));
+        alert("Outfit guardado exitosamente 🎉");
+    };
+
     return (
         <div className="suggestion-container">
             {outfitSuggestions.length > 0 && (
@@ -23,13 +40,13 @@ const GeneratedOutfit = () => {
             )}
             <div className="outfit-container">
                 {outfitSuggestions.length > 0 && (
-                    <Icons.LeftArrow fill="white" className="suggestion-arrow" onClick={prevOutfit}/>
+                    <Icons.LeftArrow fill="white" className="suggestion-arrow" onClick={prevOutfit} />
                 )}
 
                 {outfitSuggestions.length > 0 ? (
                     outfitSuggestions[currentIndex].map((item, index) => (
                         <div key={index} className="large-image-container">
-                            <img src={item.image} alt={`Outfit piece ${index}`} className="outfit-item"/>
+                            <img src={item.image} alt={`Outfit piece ${index}`} className="outfit-item" />
                         </div>
                     ))
                 ) : (
@@ -37,15 +54,16 @@ const GeneratedOutfit = () => {
                 )}
 
                 {outfitSuggestions.length > 0 && (
-                    <Icons.RightArrow fill="white" className="suggestion-arrow" onClick={nextOutfit}/>
+                    <Icons.RightArrow fill="white" className="suggestion-arrow" onClick={nextOutfit} />
                 )}
             </div>
             <div className="buttons-container">
                 <button className="new-outfit-btn">New Outfit</button>
-                <button className="save-btn">Save</button>
+                <button className="save-btn" onClick={saveOutfit}>Save</button>
             </div>
         </div>
     );
 };
 
 export default GeneratedOutfit;
+
