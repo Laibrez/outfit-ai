@@ -6,6 +6,7 @@ import GeneratedOutfit from "./generated-outfit";
 import Preferences from "./preferences";
 import AboutUs from "./about-us.js";
 import ContactUs from "./contact-us.js";
+import SavedOutfits from "./saved-outfits";
 
 function App() {
     return (
@@ -17,9 +18,12 @@ function App() {
                 <Route path="/generated-outfit" element={<GeneratedOutfit />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<ContactUs />} />
+                <Route path="/saved-outfits" element={<SavedOutfits />} /> {/* <- Nueva ruta */}
             </Routes>
         </Router>
     );
 }
+
+export default App;
 
 export default App;
