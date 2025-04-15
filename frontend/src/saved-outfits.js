@@ -62,6 +62,7 @@ function SavedOutfits() {
                 </div>
             )}
         </div>
+
     );
 }
 
