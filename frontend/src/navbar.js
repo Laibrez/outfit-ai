@@ -13,6 +13,7 @@ function Navbar() {
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/contact">Contact Us</Link></li>
                 <li><Link to="/saved-outfits">Saved Outfits</Link></li> 
+        
                 <li>
                     <button className="login-btn">Login</button> 
                 </li>
